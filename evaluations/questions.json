@@ -1,0 +1,283 @@
+
+[
+  {
+    "id": "Q01",
+    "category": "simple",
+    "question": "Show all students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students"
+  },
+  {
+    "id": "Q02",
+    "category": "simple",
+    "question": "List the names of all students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT Name FROM Students"
+  },
+  {
+    "id": "Q03",
+    "category": "simple",
+    "question": "Show the age of every student.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT Name, Age FROM Students"
+  },
+  {
+    "id": "Q04",
+    "category": "simple",
+    "question": "Display all student IDs and genders.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT StudentID, Gender FROM Students"
+  },
+  {
+    "id": "Q05",
+    "category": "filtering",
+    "question": "Find students older than 18.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Age > 18"
+  },
+  {
+    "id": "Q06",
+    "category": "filtering",
+    "question": "Show all female students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Gender = 'Female'"
+  },
+  {
+    "id": "Q07",
+    "category": "filtering",
+    "question": "List male students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Gender = 'Male'"
+  },
+  {
+    "id": "Q08",
+    "category": "filtering",
+    "question": "Find students aged 18 or younger.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Age <= 18"
+  },
+  {
+    "id": "Q09",
+    "category": "filtering",
+    "question": "Show students whose names start with A.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Name LIKE 'A%'"
+  },
+  {
+    "id": "Q10",
+    "category": "filtering",
+    "question": "Find students between 18 and 22 years old.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students WHERE Age BETWEEN 18 AND 22"
+  },
+  {
+    "id": "Q11",
+    "category": "aggregation",
+    "question": "Count the total number of students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT COUNT(*) AS TotalStudents FROM Students"
+  },
+  {
+    "id": "Q12",
+    "category": "aggregation",
+    "question": "Find the average age of students.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT AVG(Age) AS AverageAge FROM Students"
+  },
+  {
+    "id": "Q13",
+    "category": "aggregation",
+    "question": "Count students by gender.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT Gender, COUNT(*) AS StudentCount FROM Students GROUP BY Gender"
+  },
+  {
+    "id": "Q14",
+    "category": "aggregation",
+    "question": "Find the average Math marks grouped by gender.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Gender, AVG(M.Math) AS AverageMathMarks FROM Students S JOIN Marks M ON S.StudentID = M.StudentID GROUP BY S.Gender"
+  },
+  {
+    "id": "Q15",
+    "category": "aggregation",
+    "question": "Find the highest Math marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT MAX(Math) AS HighestMathMarks FROM Marks"
+  },
+  {
+    "id": "Q16",
+    "category": "aggregation",
+    "question": "Find the lowest Science marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT MIN(Science) AS LowestScienceMarks FROM Marks"
+  },
+  {
+    "id": "Q17",
+    "category": "aggregation",
+    "question": "Calculate the average English marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT AVG(English) AS AverageEnglishMarks FROM Marks"
+  },
+  {
+    "id": "Q18",
+    "category": "aggregation",
+    "question": "Count how many students have Math marks above 80.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT COUNT(*) AS StudentCount FROM Marks WHERE Math > 80"
+  },
+  {
+    "id": "Q19",
+    "category": "joins",
+    "question": "Show student names and their Math marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, M.Math FROM Students S JOIN Marks M ON S.StudentID = M.StudentID"
+  },
+  {
+    "id": "Q20",
+    "category": "joins",
+    "question": "List student names with their Science marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, M.Science FROM Students S JOIN Marks M ON S.StudentID = M.StudentID"
+  },
+  {
+    "id": "Q21",
+    "category": "joins",
+    "question": "Show each student's name and attendance percentage.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, A.AttendancePercentage FROM Students S JOIN Attendance A ON S.StudentID = A.StudentID"
+  },
+  {
+    "id": "Q22",
+    "category": "joins",
+    "question": "Find students with attendance below 75 percent.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, A.AttendancePercentage FROM Students S JOIN Attendance A ON S.StudentID = A.StudentID WHERE A.AttendancePercentage < 75"
+  },
+  {
+    "id": "Q23",
+    "category": "joins",
+    "question": "Show student names and the number of classes they attended.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, A.ClassesAttended FROM Students S JOIN Attendance A ON S.StudentID = A.StudentID"
+  },
+  {
+    "id": "Q24",
+    "category": "joins",
+    "question": "List student names with their Math marks and attendance percentages.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, M.Math, A.AttendancePercentage FROM Students S JOIN Marks M ON S.StudentID = M.StudentID JOIN Attendance A ON S.StudentID = A.StudentID"
+  },
+  {
+    "id": "Q25",
+    "category": "sorting",
+    "question": "Show the five students with the highest Math marks.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, M.Math FROM Students S JOIN Marks M ON S.StudentID = M.StudentID ORDER BY M.Math DESC LIMIT 5"
+  },
+  {
+    "id": "Q26",
+    "category": "sorting",
+    "question": "Sort students by age from youngest to oldest.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT * FROM Students ORDER BY Age ASC"
+  },
+  {
+    "id": "Q27",
+    "category": "sorting",
+    "question": "Show students in descending order of attendance percentage.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, A.AttendancePercentage FROM Students S JOIN Attendance A ON S.StudentID = A.StudentID ORDER BY A.AttendancePercentage DESC"
+  },
+  {
+    "id": "Q28",
+    "category": "aggregation",
+    "question": "Calculate the average of Math, Science, and English marks for each student.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, (M.Math + M.Science + M.English) / 3.0 AS AverageMarks FROM Students S JOIN Marks M ON S.StudentID = M.StudentID"
+  },
+  {
+    "id": "Q29",
+    "category": "filtering",
+    "question": "Find students who attended more than 50 classes.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT S.Name, A.ClassesAttended FROM Students S JOIN Attendance A ON S.StudentID = A.StudentID WHERE A.ClassesAttended > 50"
+  },
+  {
+    "id": "Q30",
+    "category": "aggregation",
+    "question": "Find the average attendance percentage.",
+    "expected_behavior": "answer",
+    "expected_sql": "SELECT AVG(AttendancePercentage) AS AverageAttendance FROM Attendance"
+  },
+  {
+    "id": "Q31",
+    "category": "unsupported",
+    "question": "Show the salary of every student.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q32",
+    "category": "unsupported",
+    "question": "Show every student's email address.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q33",
+    "category": "unsupported",
+    "question": "List students' phone numbers.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q34",
+    "category": "unsupported",
+    "question": "Show the department of each student.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q35",
+    "category": "unsupported",
+    "question": "Show students from a table that does not exist.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q36",
+    "category": "unsupported",
+    "question": "Find each student's home address.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q37",
+    "category": "invalid",
+    "question": "Show students from the Enrolments table.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q38",
+    "category": "invalid",
+    "question": "Find the average GPA of all students.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q39",
+    "category": "invalid",
+    "question": "Show each student's date of birth.",
+    "expected_behavior": "reject",
+    "expected_sql": null
+  },
+  {
+    "id": "Q40",
+    "category": "ambiguous",
+    "question": "Show the best students.",
+    "expected_behavior": "clarify_or_reject",
+    "expected_sql": null
+  }
+]

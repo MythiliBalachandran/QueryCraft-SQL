@@ -1,0 +1,3203 @@
+﻿id,category,question,expected_behavior,generation_success,generated_sql,result_correct,status,latency_seconds,message,error
+Q01,simple,Show all students.,answer,True,SELECT * FROM Students,True,PASS,13.674,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show all students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q02,simple,List the names of all students.,answer,True,SELECT Name FROM Students,True,PASS,9.521,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+List the names of all students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q03,simple,Show the age of every student.,answer,True,"SELECT Students.Name, Students.Age FROM Students",True,PASS,11.248,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show the age of every student.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q04,simple,Display all student IDs and genders.,answer,True,"SELECT S.StudentID, S.Gender FROM Students AS S",True,PASS,11.419,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Display all student IDs and genders.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q05,filtering,Find students older than 18.,answer,True,"SELECT S.Name, S.Age FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID WHERE A.TotalClasses > 18;",False,WRONG_RESULT,17.391,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find students older than 18.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q06,filtering,Show all female students.,answer,True,SELECT S.* FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID WHERE S.Gender='Female',True,PASS,12.661,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show all female students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q07,filtering,List male students.,answer,True,"SELECT S.Name, S.Age, S.Gender FROM Students AS S WHERE S.Gender = 'Male'",False,WRONG_RESULT,12.299,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+List male students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q08,filtering,Find students aged 18 or younger.,answer,True,SELECT * FROM Students WHERE Age <= 18,True,PASS,11.213,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find students aged 18 or younger.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q09,filtering,Show students whose names start with A.,answer,True,SELECT S.* FROM Students AS S WHERE S.Name LIKE 'A%',True,PASS,12.358,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show students whose names start with A.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q10,filtering,Find students between 18 and 22 years old.,answer,True,"SELECT S.Name, S.Age FROM Students AS S WHERE S.Age BETWEEN 18 AND 22",False,WRONG_RESULT,13.469,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find students between 18 and 22 years old.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q11,aggregation,Count the total number of students.,answer,True,SELECT COUNT(*) FROM Students,False,WRONG_RESULT,11.631,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Count the total number of students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q12,aggregation,Find the average age of students.,answer,True,SELECT AVG(Age) FROM Students;,False,WRONG_RESULT,12.877,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the average age of students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q13,aggregation,Count students by gender.,answer,True,"SELECT S.Gender, COUNT(*) FROM Students AS S GROUP BY S.Gender",False,WRONG_RESULT,15.244,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Count students by gender.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q14,aggregation,Find the average Math marks grouped by gender.,answer,True,"SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender",False,WRONG_RESULT,13.399,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the average Math marks grouped by gender.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q15,aggregation,Find the highest Math marks.,answer,True,SELECT Marks.Math FROM Marks,False,WRONG_RESULT,11.122,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the highest Math marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q16,aggregation,Find the lowest Science marks.,answer,True,SELECT M.Science FROM Marks AS M,False,WRONG_RESULT,18.633,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the lowest Science marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q17,aggregation,Calculate the average English marks.,answer,True,SELECT AVG(E.English) FROM Marks AS E,False,WRONG_RESULT,10.517,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Calculate the average English marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q18,aggregation,Count how many students have Math marks above 80.,answer,True,SELECT COUNT(*) FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID WHERE M.Math > 80;,False,WRONG_RESULT,11.89,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Count how many students have Math marks above 80.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q19,joins,Show student names and their Math marks.,answer,True,"SELECT S.Name, M.Math FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID",True,PASS,11.868,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show student names and their Math marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q20,joins,List student names with their Science marks.,answer,True,"SELECT S.Name, M.Math FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID",False,WRONG_RESULT,12.047,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+List student names with their Science marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q21,joins,Show each student's name and attendance percentage.,answer,True,"SELECT S.Name, A.AttendancePercentage FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID;",True,PASS,12.467,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show each student's name and attendance percentage.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q22,joins,Find students with attendance below 75 percent.,answer,True,SELECT S.* FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID WHERE A.AttendancePercentage < 75,False,WRONG_RESULT,12.684,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find students with attendance below 75 percent.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q23,joins,Show student names and the number of classes they attended.,answer,True,"SELECT S.Name, A.TotalClasses FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID;",False,WRONG_RESULT,12.051,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show student names and the number of classes they attended.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q24,joins,List student names with their Math marks and attendance percentages.,answer,True,"SELECT S.Name, M.Math, A.AttendancePercentage FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID JOIN Attendance AS A ON S.StudentID = A.StudentID",True,PASS,13.56,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+List student names with their Math marks and attendance percentages.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q25,sorting,Show the five students with the highest Math marks.,answer,True,"SELECT M.StudentID, M.Math FROM Marks AS M ORDER BY M.Math DESC LIMIT 5;",False,WRONG_RESULT,12.132,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show the five students with the highest Math marks.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q26,sorting,Sort students by age from youngest to oldest.,answer,True,SELECT * FROM Students ORDER BY Age,True,PASS,11.033,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Sort students by age from youngest to oldest.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q27,sorting,Show students in descending order of attendance percentage.,answer,True,"SELECT S.Gender, A.AttendancePercentage FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID ORDER BY A.AttendancePercentage DESC",False,WRONG_RESULT,13.163,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show students in descending order of attendance percentage.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q28,aggregation,"Calculate the average of Math, Science, and English marks for each student.",answer,True,"SELECT M.Math, M.Science, M.English FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.StudentID",False,WRONG_RESULT,13.068,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Calculate the average of Math, Science, and English marks for each student.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q29,filtering,Find students who attended more than 50 classes.,answer,True,SELECT S.* FROM Students AS S JOIN Attendance AS A ON S.StudentID = A.StudentID WHERE A.TotalClasses > 50,False,WRONG_RESULT,12.544,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find students who attended more than 50 classes.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q30,aggregation,Find the average attendance percentage.,answer,True,SELECT T2.AttendancePercentage FROM Students AS T1 INNER JOIN Attendance AS T2 ON T1.StudentID = T2.StudentID,False,WRONG_RESULT,13.246,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the average attendance percentage.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q31,unsupported,Show the salary of every student.,reject,False,,True,PASS_REJECTED,12.583,"The question requests salary information, but the available database schema does not contain a matching field. The query was rejected rather than returning unrelated data.",
+Q32,unsupported,Show every student's email address.,reject,False,,True,PASS_REJECTED,11.189,"The question requests email information, but the available database schema does not contain a matching field. The query was rejected rather than returning unrelated data.",
+Q33,unsupported,List students' phone numbers.,reject,False,,True,PASS_REJECTED,10.492,"The question requests phone information, but the available database schema does not contain a matching field. The query was rejected rather than returning unrelated data.",
+Q34,unsupported,Show the department of each student.,reject,False,,True,PASS_REJECTED,11.081,"The question requests department information, but the available database schema does not contain a matching field. The query was rejected rather than returning unrelated data.",
+Q35,unsupported,Show students from a table that does not exist.,reject,False,,True,PASS_REJECTED,0.0,The question requests data from a nonexistent table. No matching table is available in the database schema.,
+Q36,unsupported,Find each student's home address.,reject,False,,True,PASS_REJECTED,11.525,"The question requests address information, but the available database schema does not contain a matching field. The query was rejected rather than returning unrelated data.",
+Q37,invalid,Show students from the Enrolments table.,reject,True,SELECT * FROM Students;,False,UNEXPECTED_ACCEPTANCE,11.301,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show students from the Enrolments table.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q38,invalid,Find the average GPA of all students.,reject,True,SELECT AVG(T2.AttendancePercentage) FROM Students AS T1 JOIN Attendance AS T2 ON T1.StudentID = T2.StudentID;,False,UNEXPECTED_ACCEPTANCE,17.791,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Find the average GPA of all students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q39,invalid,Show each student's date of birth.,reject,True,SELECT S.Name FROM Students AS S,False,UNEXPECTED_ACCEPTANCE,13.593,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show each student's date of birth.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",
+Q40,ambiguous,Show the best students.,clarify_or_reject,True,SELECT S.* FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID ORDER BY M.Math DESC,False,UNEXPECTED_ACCEPTANCE,13.787,"You are an expert SQLite query-generation system.
+
+Your task is to translate the user's question into ONE correct,
+read-only SQLite query, using only the database schema provided.
+
+### DATABASE SCHEMA:
+CREATE TABLE Students (
+        StudentID INTEGER PRIMARY KEY,
+        Name TEXT,
+        Age INTEGER,
+        Gender TEXT
+    )
+CREATE TABLE Marks (
+        StudentID INTEGER,
+        Math INTEGER,
+        Science INTEGER,
+        English INTEGER,
+        History INTEGER,
+        Geography INTEGER,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+CREATE TABLE Attendance (
+        StudentID INTEGER,
+        TotalClasses INTEGER,
+        ClassesAttended INTEGER,
+        AttendancePercentage REAL,
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+    )
+
+
+### USER QUESTION:
+Show the best students.
+
+### RULES:
+
+1. Use only tables and columns explicitly present in the schema.
+2. Never invent a table, column, relationship, or database field.
+3. Identify which table contains each requested piece of information.
+4. Use JOINs only when the required tables and their relationships
+   are supported by the schema.
+5. Apply the requested filters, aggregations, grouping, sorting,
+   and limits accurately.
+6. Do not substitute a different question or return an unrelated query.
+7. Do not assume that a requested table or column exists.
+8. If the question requests information that is not represented by
+   any available table or column, return UNANSWERABLE. Do not return
+   a partial answer or a query that retrieves different information.
+9. If the question is ambiguous, do not guess the user's intended meaning.
+10. Generate only a single read-only SELECT query. Do not generate
+    data-modifying statements or multiple SQL statements.
+11. Before returning the query, verify that all referenced tables,
+    columns, joins, and conditions are supported by the schema.
+12. Return the SQL on one line, without Markdown fences or explanations.
+
+### EXAMPLES:
+
+Example 1:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show all students.
+
+Output:
+SELECT * FROM Students;
+
+Example 2:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+CREATE TABLE Marks (StudentID INTEGER, Math INTEGER);
+
+Question:
+Calculate average Math marks grouped by gender.
+
+Output:
+SELECT S.Gender, AVG(M.Math) AS Average_Math_Marks FROM Students AS S JOIN Marks AS M ON S.StudentID = M.StudentID GROUP BY S.Gender;
+
+Example 3:
+Schema:
+CREATE TABLE Students (StudentID INTEGER, Gender TEXT);
+
+Question:
+Show students from a table that does not exist.
+
+Output:
+UNANSWERABLE
+
+### OUTPUT:
+Return exactly one of the following:
+- One valid, read-only SQLite SELECT query on a single line.
+- The exact word UNANSWERABLE if the question cannot be answered
+  using the provided schema.
+
+Output:",

@@ -1,0 +1,60 @@
+# SQL Assistant Configuration
+# This file contains all configuration settings for the SQL Assistant application
+
+# LLM Model Configuration (Using Ollama)
+llm:
+  # Ollama service base URL (change if running on different host/port)
+  base_url: "http://localhost:11434"
+  # Model name as available in Ollama (pull models with: ollama pull <model_name>)
+  # Recommended models: phi, neural-chat, mistral, llama2, llama3:latest
+  model_name: "llama3.2:3b"
+  # Retry configuration for invalid SQL generation
+  max_retries: 3  # Maximum number of attempts to generate valid SQL
+  enable_result_formatting: true  # Use LLM to format query results (slower but better)
+  
+  # Multiple models for evaluation and comparison
+  # Configure models to evaluate during benchmarking
+  evaluation_models:
+    - name: "phi3"
+      model_id: "phi3"
+      enabled: false
+      description: "Phi model - lightweight and fast"
+    
+    - name: "llama3.2:3b"
+      model_id: "llama3.2:3b"
+      enabled: true
+      description: "Llama 3.2 3B local model"
+    
+    - name: "SQLCoder"
+      model_id: "sqlcoder:7b"
+      enabled: false
+      description: "SQLCoder - specialized for SQL generation"
+    
+    - name: "qwen3"
+      model_id: "qwen3:8b"
+      enabled: false
+      description: "Qwen 3 - large language model with good reasoning"
+
+  # Temperature for generation (0.0 = deterministic, 1.0 = random)
+  temperature: 0.1  # Low temperature for more deterministic SQL generation
+
+database:
+  path: "data/students_data_multi_table.db"
+  type: "sqlite"
+
+# Security Configuration
+security:
+  max_queries_per_minute: 100
+  max_result_rows: 10000
+  enable_guardrails: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+
+# API Configuration
+api:
+  host: "localhost"
+  port: 8501
+  debug: false
